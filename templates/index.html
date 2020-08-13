@@ -4,9 +4,10 @@
 
 {% block banner %}
 <div class="container">
-  <div id="logo">
-    <span class="site-name"><a class="navbar-brand" href="{{ SITEURL }}"><img width="310" src="{{ USER_LOGO_URL }}" class="attachment-full size-full" alt="logo">          </a>
+  <div id="logo" class="flex-container">
+    <span class="site-name"><a class="navbar-brand" href="{{ SITEURL }}"><img width="310" src="{{ USER_LOGO_URL }}" class="attachment-full size-full" alt="logo"></a>
     </span><!-- end of .site-name -->
+    <h1>Hey, I'm Adrián</h1>
   </div><!-- end of #logo -->
 
   	<div class="tagline">
@@ -16,9 +17,9 @@
     </div>
 
     {% if NEWS %}
-      <ul>
+      <ul id="news">
       {% for new in NEWS %}
-        <li><time>[{{ new['date'] }}]: </time>{{ new['description'] | markdown }}</li>
+        <li><time>[{{ new['date'] }}]: </time>{{ new['description'] | markdown | trim }}</li>
       {% endfor %}
       </ul>
     {% endif %}
@@ -61,8 +62,10 @@
 {% endblock %}
 
 {% block footer %}
-<footer>
-{% include "modules/pagination.html" %}
-</footer>
+{% if articles_paginator.num_pages > 1 %}
+  <footer>
+    {% include "modules/pagination.html" %}
+  </footer>
+{% endif %}
 <div class="article_meta"></div>
 {% endblock %}
