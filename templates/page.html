@@ -7,10 +7,10 @@
 {% block content %}
 <article>
   <div class="blog-item-wrap">
-    <div class="post-inner-content">
+    <div class="post-inner-content" style="padding-top: 0px;">
       <header class="entry-header page-header">
-        <span class="cat-item"><time datetime="{{ page.modified }}">Last Modified {{ page.locale_modified }}</time></span>
         <h1 class="entry-title"><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></h1>
+        <span class="cat-item"><time datetime="{{ page.modified }}">Last Modified {{ page.locale_modified }}</time></span>
       </header><!-- .entry-header -->
       <div class="entry-content">
         {{ page.content }}
