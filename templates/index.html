@@ -8,13 +8,20 @@
     <span class="site-name"><a class="navbar-brand" href="{{ SITEURL }}"><img width="310" src="{{ USER_LOGO_URL }}" class="attachment-full size-full" alt="logo">          </a>
     </span><!-- end of .site-name -->
   </div><!-- end of #logo -->
+
   	<div class="tagline">
   		<header class="entry-header page-header">
   			<h1 class="entry-title">Latest news</a></h1>
   		</header>
     </div>
 
-    <!-- {% include 'news.md' %} -->  ## TODOOOOOOOO
+    {% if NEWS %}
+      <ul>
+      {% for new in NEWS %}
+        <li><time>[{{ new['date'] }}]: </time>{{ new['description'] | markdown }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
 
   	<div class="tagline">
   		<header class="entry-header page-header">
