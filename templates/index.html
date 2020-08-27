@@ -2,6 +2,21 @@
 {% block metatitle %}{{ SITENAME }}{% endblock %}
 {% block title %}{{ SITENAME }}{% endblock %}
 
+{% macro get_icon_pub(link) %}
+
+  {# Attempt to normalize link URLs #}
+  {%- set temp = link|lower|replace('http://', '')|replace('https://', '')|replace('www.', '') -%}
+
+  {# Choosing a specific link icon #}
+
+  {%- if temp.startswith('arxiv.org') %}{% set class = 'ai-arxiv' %}
+    <i class="ai {{ class }} ai-lg"></i>
+  {% else %}
+    {% set class = 'fa-external-link' %}
+    <i class="fa {{ class }} fa-lg"></i>
+  {% endif -%}
+{%- endmacro -%}
+
 {% block banner %}
 <div class="container">
   <div id="logo" class="flex-container">
@@ -20,6 +35,20 @@
       <ul id="news">
       {% for new in NEWS %}
         <li><time>[{{ new['date'] }}]: </time>{{ new['description'] | markdown | trim }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="tagline">
+      <header class="entry-header page-header">
+        <h1 class="entry-title">Publications</a></h1>
+      </header>
+    </div>
+
+    {% if PUBLICATIONS %}
+      <ul id="pubs">
+      {% for pub in PUBLICATIONS %}
+        <li><time>[{{ pub['date'] }}]: </time><a href="{{ pub['link'] }}">{{ pub['title'] }}{{ get_icon_pub(pub['link']) }}</a></li>
       {% endfor %}
       </ul>
     {% endif %}
